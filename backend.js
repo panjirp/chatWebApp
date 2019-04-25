@@ -90,7 +90,7 @@ wsServer.on('request', function(request) {
 
                 connection.sendUTF(JSON.stringify({ type:'colorSelf', data: userColor }));
 
-                var json = JSON.stringify({ type:'color', data: obj });
+                var json = JSON.stringify({ type:'connect', data: obj });
 
                 for (var i=0; i < clients.length; i++) {
                     clients[i].sendUTF(json);
@@ -134,6 +134,19 @@ wsServer.on('request', function(request) {
             clients.splice(index, 1);
             // push back user's color to be reused by another user
             colors.push(userColor);
+
+            var obj = {
+                time: (new Date()).getTime(),
+                author: userName,
+                color: userColor,
+                total: clients.length
+            };
+
+            var json = JSON.stringify({ type:'disconnect', data: obj });
+
+                for (var i=0; i < clients.length; i++) {
+                    clients[i].sendUTF(json);
+                }
         }
     });
 
