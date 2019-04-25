@@ -84,7 +84,8 @@ wsServer.on('request', function(request) {
                 var obj = {
                     time: (new Date()).getTime(),
                     author: userName,
-                    color: userColor
+                    color: userColor,
+                    total: clients.length
                 };
 
                 connection.sendUTF(JSON.stringify({ type:'colorSelf', data: userColor }));

@@ -18,7 +18,7 @@
               height: 160px; 
             }
 
-            #user { 
+            #userlist { 
               padding:5px; 
               background:#ddd; 
               border-radius:5px;
@@ -54,7 +54,9 @@
     <div id="" class="col-md-1">
     </div>
 
-    <div id="user" class="col-md-1">
+    <div id="userlist" class="col-md-1">
+    <p id="total"></p>
+    <div id="user"></div>
     </div>
 
     <div id="" class="col-md-1">

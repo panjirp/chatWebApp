@@ -6,6 +6,7 @@ $(function () {
     var input = $('#input');
     var user = $('#user');
     var status = $('#status');
+    var total = $('#total');
 
     // my color assigned by the server
     var myColor = false;
@@ -62,6 +63,7 @@ $(function () {
         } else if (json.type === 'color') { // list user
             myColor = json.data.color;
             var dt = new Date(json.data.time);
+            total.html('<p>Total User : ' + json.data.total + '</p>');
             user.prepend('<p><span style="color:' + myColor + '">' + json.data.author + '</span> Has Joined The Chat @ ' +
             + (dt.getHours() < 10 ? '0' + dt.getHours() : dt.getHours()) + ':'
             + (dt.getMinutes() < 10 ? '0' + dt.getMinutes() : dt.getMinutes())
