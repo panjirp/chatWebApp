@@ -54,10 +54,13 @@ $(function () {
 
         // NOTE: if you're not sure about the JSON structure
         // check the server source code above
-        if (json.type === 'color') { // first response from the server with user's color
-            myColor = json.data.color;
+        if (json.type === 'colorSelf') { // first response from the server with user's color
+            myColor = json.data;
             status.text(myName + ': ').css('color', myColor);
             input.removeAttr('disabled').focus();
+            // from now user can start sending messages
+        } else if (json.type === 'color') { // list user
+            myColor = json.data.color;
             var dt = new Date(json.data.time);
             user.prepend('<p><span style="color:' + myColor + '">' + json.data.author + '</span> Has Joined The Chat @ ' +
             + (dt.getHours() < 10 ? '0' + dt.getHours() : dt.getHours()) + ':'

@@ -65,6 +65,7 @@ wsServer.on('request', function(request) {
     var userName = false;
     var userColor = false;
 
+    
     console.log((new Date()) + ' Connection accepted.');
 
     // send back chat history
@@ -85,6 +86,8 @@ wsServer.on('request', function(request) {
                     author: userName,
                     color: userColor
                 };
+
+                connection.sendUTF(JSON.stringify({ type:'colorSelf', data: userColor }));
 
                 var json = JSON.stringify({ type:'color', data: obj });
 
@@ -111,12 +114,15 @@ wsServer.on('request', function(request) {
 
                 // broadcast message to all connected clients
                 var json = JSON.stringify({ type:'message', data: obj });
+                
                 for (var i=0; i < clients.length; i++) {
                     clients[i].sendUTF(json);
                 }
             }
         }
     });
+
+    // console.log(clients.length);
 
     // user disconnected
     connection.on('close', function(connection) {
